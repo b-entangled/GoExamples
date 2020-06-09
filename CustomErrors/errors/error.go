@@ -3,6 +3,7 @@ package errors
 import (
 	"fmt"
 )
+
 // Error :- Define Error Interface and Implement error interface (Error()string)
 type Error interface {
 	error
