@@ -1,13 +1,14 @@
-package errors
+Example to Implement and Use Custom Error Types.
 
-import (
-	"fmt"
-)
+errors.go :-
+
 // Error :- Define Error Interface and Implement error interface (Error()string)
+// Implements error interface along with custom methods
 type Error interface {
 	error
 	Code() int
 }
+
 
 // CustomError :- Custom Error Fields
 type CustomError struct {
@@ -15,17 +16,7 @@ type CustomError struct {
 	ECode   int
 }
 
-// Initialize Error Interface
-func CError(message string, code int) Error {
-	return &CustomError{Message: message, ECode: code}
-}
-
 // Implementation of error Interface
 func (ce *CustomError) Error() string {
 	return fmt.Sprintf("Error: %s, Code: %d", ce.Message, ce.ECode)
-}
-
-// Custom Function for Error Code
-func (ce *CustomError) Code() int {
-	return ce.ECode
 }

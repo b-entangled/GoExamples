@@ -6,7 +6,11 @@ import (
 )
 
 func main() {
-	var customError error = errors.CError("Custom Error", 101)
-	fmt.Printf("Error Type: %T\n", customError)
-	fmt.Println(customError.Error())
+	var err error = errors.CError("Custom Error", 101)
+	if cerr, ok := err.(*errors.CustomError); ok {
+		fmt.Printf("Error Type: %T\n", cerr)
+		fmt.Println(cerr.Error())
+		fmt.Println(cerr.Code())
+	}
+
 }
