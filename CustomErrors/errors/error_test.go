@@ -8,30 +8,30 @@ import (
 )
 
 var _ = Describe("Error", func() {
-	var(
+	var (
 		customError1 Error
 		customError2 Error
 	)
-	BeforeEach(func(){
+	BeforeEach(func() {
 		customError1 = CError("CustomError1", 1)
 		customError2 = CError("CustomError2", 2)
 	})
-	Describe("CustomError1", func(){
-		Context("Success", func(){
-			It("Message", func(){
+	Describe("CustomError1", func() {
+		Context("Success", func() {
+			It("Message", func() {
 				Expect(customError1.Error()).To(Equal("Error: CustomError1, Code: 1"))
 			})
-			It("Code", func(){
+			It("Code", func() {
 				Expect(customError1.Code()).To(Equal(1))
 			})
 		})
 	})
-	Describe("CustomError2", func(){
-		Context("Success", func(){
-			It("Message", func(){
+	Describe("CustomError2", func() {
+		Context("Success", func() {
+			It("Message", func() {
 				Expect(customError2.Error()).To(Equal("Error: CustomError2, Code: 2"))
 			})
-			It("Code", func(){
+			It("Code", func() {
 				Expect(customError2.Code()).To(Equal(2))
 			})
 		})
