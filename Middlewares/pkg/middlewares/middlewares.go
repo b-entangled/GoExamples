@@ -2,24 +2,55 @@ package middlewares
 
 import (
 	"strings"
-	spro "github.com/b-entangled/GoExamples/Middlewares/pkg/string_processor"
 )
 
-type MWare func([]string)[]string
+type MWare func(string)[]string
 
-func ToLowerMiddleware(inp []string) []string{
-	var ret = make([]string, 0)
-	for _, row := range inp{
-		ret = append(ret, strings.ToLower(row))
+// ToLowerMiddleware :- Split string, Convert all words to Lower Case, Join Strings and call next Middleware/ Function
+func ToLowerMiddleware(next MWare) MWare{
+	fn := func(inp string) []string{
+		var ret = make([]string, 0)
+		str := strings.Split(inp," ")
+		for _, row := range str{
+			ret = append(ret, strings.ToLower(row))
+		}
+		return next(strings.Join(ret, " "))
 	}
-	return ret
+	return fn
 }
 
-func StringsMiddlewares(inp string, next MWare) MWare{
-	ret := spro.SplitString(inp)
-	var out []string
-	fn := func([]string)[]string{
-		next(ret)
+// RemoveRecurrent :- Split string, Remove words which will appear frequently, Join Strings and call next Middleware/ Function
+func RemoveRecurrent(next MWare) MWare{
+	fn := func(inp string) []string{
+	var ret = make([]string, 0)
+	str := strings.Split(inp," ")
+	for _, row := range str{
+		ok := true
+		for _, key := range []string{"at", "the", "of", "and", "by", "a", "an"}{
+			if row==key{
+				ok = false
+				break
+			}
+		}
+		if ok {
+			ret = append(ret, row)
+		}
+		
 	}
-	return MWare(fn)
+	return next(strings.Join(ret, " "))
+}
+return fn
+}
+
+// ToUpperMiddleware :- Split string, Convert all words to Upper Case, Join Strings and call next Middleware/ Function
+func ToUpperMiddleware(next MWare) MWare{
+	fn := func(inp string) []string{
+	var ret = make([]string, 0)
+	str := strings.Split(inp," ")
+		for _, row := range str{
+			ret = append(ret, strings.ToUpper(row))
+		}
+		return next(strings.Join(ret, " "))
+	}
+	return fn
 }

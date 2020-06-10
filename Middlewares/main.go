@@ -13,6 +13,13 @@ func main(){
 	an electrically charged atom and an electrically charged molecule, showcasing a way to 
 	build hybrid quantum information systems that could manipulate, store and transmit different forms of data.
 	`
-	fmt.Println(len(spro.SplitString(sentence)))
-	fmt.Println(mware.StringsMiddlewares(mware.StringsMiddlewares(sentence)))
+	// Call SplitString Method
+	fmt.Println(spro.SplitString(sentence))
+
+	// Add Enhancement to Split String without modifying the SplitString Code. i.e:- Add middleware which will do preprocessing
+	fmt.Println(mware.ToUpperMiddleware(spro.SplitString)(sentence))
+
+	// Embed Middlewares inside Other Middlewares. The one which appears first will execute forst. 
+	// i.e:- ToLowerMiddleware -> RemoveRecurrent -> ToUpperMiddleware -> SplitString
+	fmt.Println(mware.ToLowerMiddleware(mware.RemoveRecurrent(mware.ToUpperMiddleware(spro.SplitString)))(sentence))
 }
