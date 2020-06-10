@@ -4,6 +4,6 @@ import (
 	"strings"
 )
 
-func SplitString(str string)[]string{
-	return strings.Split(str," ")
+func SplitString(str string) []string {
+	return strings.Split(str, " ")
 }

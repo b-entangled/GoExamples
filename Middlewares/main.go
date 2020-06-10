@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	spro "github.com/b-entangled/GoExamples/Middlewares/pkg/string_processor"
 	mware "github.com/b-entangled/GoExamples/Middlewares/pkg/middlewares"
+	spro "github.com/b-entangled/GoExamples/Middlewares/pkg/string_processor"
 )
 
-func main(){
+func main() {
 	var sentence string = `
 	Physicists at the National Institute of Standards and Technology have boosted their control of the 
 	fundamental properties of molecules at the quantum level by linking or "entangling" 
@@ -19,7 +19,7 @@ func main(){
 	// Add Enhancement to Split String without modifying the SplitString Code. i.e:- Add middleware which will do preprocessing
 	fmt.Println(mware.ToUpperMiddleware(spro.SplitString)(sentence))
 
-	// Embed Middlewares inside Other Middlewares. The one which appears first will execute forst. 
+	// Embed Middlewares inside Other Middlewares. The one which appears first will execute forst.
 	// i.e:- ToLowerMiddleware -> RemoveRecurrent -> ToUpperMiddleware -> SplitString
 	fmt.Println(mware.ToLowerMiddleware(mware.RemoveRecurrent(mware.ToUpperMiddleware(spro.SplitString)))(sentence))
 }
